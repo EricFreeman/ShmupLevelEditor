@@ -2,9 +2,9 @@
 {
     public class Enemy
     {
-        public string Type;
-        public float Spawn;
-        public float Y;
-        public float Speed;
+        public string Type { get; set; }
+        public float Spawn { get; set; }
+        public float Y { get; set; }
+        public float Speed { get; set; }
     }
 }

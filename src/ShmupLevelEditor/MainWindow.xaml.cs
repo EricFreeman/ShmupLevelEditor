@@ -1,43 +1,68 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
 using ShmupLevelEditor.Models;
 
 namespace ShmupLevelEditor
 {
-    public partial class MainWindow
+    public partial class MainWindow : INotifyPropertyChanged
     {
-        public List<Wave> WaveList = new List<Wave>();
-        private int _selectedIndex;
+        private ObservableCollection<Wave> _waveList;
+
+        public ObservableCollection<Wave> WaveList
+        {
+            get { return _waveList; }
+            set
+            {
+                _waveList = value;
+                OnPropertyChanged();
+            }
+        }
 
         public MainWindow()
         {
             InitializeComponent();
+
+            WaveList = new ObservableCollection<Wave>();
         }
 
         private void WavesEdit_OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            var s = (TreeViewItem)((TreeView) sender).SelectedItem;
-            _selectedIndex = int.Parse(s.Name.Substring(1, s.Name.Length - 1));
+
         }
 
         private void AddButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var index = WavesEdit.Items.Count;
-            var wave = new TreeViewItem {Header = "Wave", Name = "N" + index};
-            WavesEdit.Items.Add(wave);
-            WaveList.Add(new Wave(index));
+            var w = new Wave
+            {
+                EnemyList =
+                    new ObservableCollection<Enemy>
+                    {
+                        new Enemy {Type = "Popcorn"},
+                        new Enemy {Type = "ZigZag"},
+                        new Enemy {Type = "Bomber"}
+                    }
+            };
+            WaveList.Add(w);
+            WavesEdit.ItemsSource = WaveList;
         }
 
         private void RemoveButton_OnClick(object sender, RoutedEventArgs e)
         {
-            if (_selectedIndex > 0)
-            {
-                WaveList.Remove(WaveList.First(x => x.Index == _selectedIndex));
-                WavesEdit.Items.RemoveAt(_selectedIndex);
-                _selectedIndex = -1;
-            }
+            
         }
+
+        #region ProeprtyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
     }
 }
