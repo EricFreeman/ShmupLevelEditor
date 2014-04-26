@@ -3,11 +3,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using Microsoft.Win32;
+using ShmupLevelEditor.Interfaces;
 using ShmupLevelEditor.Models;
+using ShmupLevelEditor.Util;
 
 namespace ShmupLevelEditor
 {
-    public partial class MainWindow : INotifyPropertyChanged
+    public partial class MainWindow : INotifyPropertyChanged, IEditor
     {
         #region Properties
 
@@ -106,9 +109,9 @@ namespace ShmupLevelEditor
 
         #endregion
 
-        #region Menu
+        #region Helpers
 
-        private void NewMenuItem_OnClick(object sender, RoutedEventArgs e)
+        public void Clear()
         {
             SelectedWave = null;
             SelectedEnemy = null;
@@ -118,6 +121,15 @@ namespace ShmupLevelEditor
             WaveList.Clear();
         }
 
+        #endregion
+
+        #region Menu
+
+        private void NewMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            Clear();
+        }
+
         private void ExitMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
@@ -125,12 +137,16 @@ namespace ShmupLevelEditor
 
         private void SaveMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new System.NotImplementedException();
+            var sfd = new SaveFileDialog();
+            if(sfd.ShowDialog().IsTrue())
+                IO.Save(this, sfd.FileName);
         }
 
         private void OpenMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new System.NotImplementedException();
+            var ofd = new OpenFileDialog();
+            if(ofd.ShowDialog().IsTrue())
+                IO.Load(this, ofd.FileName);
         }
 
         #endregion
