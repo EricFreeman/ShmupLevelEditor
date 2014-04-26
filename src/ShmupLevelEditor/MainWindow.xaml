@@ -40,8 +40,8 @@
 
       <ScrollViewer Grid.Row="1">
         <TreeView Name="WavesEdit"
-                  SelectedItemChanged="WavesEdit_OnSelectedItemChanged"
-                  ItemsSource="{Binding WaveList}">
+                  ItemsSource="{Binding WaveList}"
+                  SelectedItemChanged="WavesEdit_OnSelectedItemChanged">
           <TreeView.ItemTemplate>
             <HierarchicalDataTemplate ItemsSource="{Binding Path=EnemyList}" >
               <TextBlock Text="Wave" />
