@@ -1,7 +1,9 @@
-﻿using System.IO;
+﻿using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Xml;
 using ShmupLevelEditor.Interfaces;
+using ShmupLevelEditor.Models;
 using ShmupLevelEditor.Util;
 
 namespace ShmupLevelEditor
@@ -36,6 +38,28 @@ namespace ShmupLevelEditor
 
             var doc = new XmlDocument();
             doc.Load(fileName);
+            var waves = doc.SelectSingleNode("Waves");
+
+            editor.WaveList = new ObservableCollection<Wave>();
+
+            foreach (XmlNode wave in waves.SelectNodes("Wave"))
+            {
+                var w = new Wave();
+                w.EnemyList = new ObservableCollection<Enemy>();
+
+                foreach (XmlNode enemy in wave.SelectNodes("Enemy"))
+                {
+                    w.EnemyList.Add(new Enemy
+                    {
+                        Type = enemy.Attributes["Type"].InnerText,
+                        Spawn = float.Parse(enemy.Attributes["Spawn"].InnerText),
+                        Y = float.Parse(enemy.Attributes["Y"].InnerText),
+                        Speed = float.Parse(enemy.Attributes["Speed"].InnerText)
+                    });
+                }
+
+                editor.WaveList.Add(w);
+            }
         }
     }
 }

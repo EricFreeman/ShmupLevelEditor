@@ -145,8 +145,11 @@ namespace ShmupLevelEditor
         private void OpenMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             var ofd = new OpenFileDialog();
-            if(ofd.ShowDialog().IsTrue())
+            if (ofd.ShowDialog().IsTrue())
+            {
                 IO.Load(this, ofd.FileName);
+                WavesEdit.ItemsSource = WaveList;
+            }
         }
 
         #endregion
