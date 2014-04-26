@@ -106,6 +106,35 @@ namespace ShmupLevelEditor
 
         #endregion
 
+        #region Menu
+
+        private void NewMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            SelectedWave = null;
+            SelectedEnemy = null;
+
+            WavePanel.DataContext = SelectedWave;
+            EnemyPanel.DataContext = SelectedEnemy;
+            WaveList.Clear();
+        }
+
+        private void ExitMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void SaveMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void OpenMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        #endregion
+
         #region PropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;

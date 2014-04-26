@@ -17,10 +17,10 @@
 
     <Menu Grid.ColumnSpan="2" Grid.Row="0">
       <MenuItem Header="File">
-        <MenuItem Header="New" />
-        <MenuItem Header="Save" />
-        <MenuItem Header="Open" />
-        <MenuItem Header="Exit" />
+        <MenuItem Header="New" Name="NewMenuItem" Click="NewMenuItem_OnClick" />
+        <MenuItem Header="Save" Name="SaveMenuItem" Click="SaveMenuItem_OnClick" />
+        <MenuItem Header="Open" Name="OpenMenuItem" Click="OpenMenuItem_OnClick" />
+        <MenuItem Header="Exit" Name="ExitMenuItem" Click="ExitMenuItem_OnClick" />
       </MenuItem>
     </Menu>
 
