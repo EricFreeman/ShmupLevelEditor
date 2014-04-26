@@ -60,11 +60,33 @@
     <StackPanel Grid.Row="1" Grid.Column="1">
 
       <StackPanel Name="WavePanel">
+
+        <StackPanel.Style>
+          <Style TargetType="StackPanel">
+            <Style.Triggers>
+              <DataTrigger Binding="{Binding }" Value="{x:Null}">
+                <Setter Property="Visibility" Value="Collapsed" />
+              </DataTrigger>
+            </Style.Triggers>
+          </Style>
+        </StackPanel.Style>
+        
         <Label Content="Before Wave Delay:" />
         <TextBox Text="{Binding BeforeWaveDelay, Mode=TwoWay}" Name="BeforeWaveDelayEdit" />
       </StackPanel>
 
       <StackPanel Name="EnemyPanel">
+
+        <StackPanel.Style>
+          <Style TargetType="StackPanel">
+            <Style.Triggers>
+              <DataTrigger Binding="{Binding }" Value="{x:Null}">
+                <Setter Property="Visibility" Value="Collapsed" />
+              </DataTrigger>
+            </Style.Triggers>
+          </Style>
+        </StackPanel.Style>
+        
         <Label Content="Type:" />
         <TextBox Text="{Binding Type, Mode=TwoWay}" Name="Type" />
 

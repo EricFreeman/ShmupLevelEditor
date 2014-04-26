@@ -95,16 +95,10 @@ namespace ShmupLevelEditor
         private void WavesEdit_OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             var wave = e.NewValue as Wave;
-            if (wave != null)
-            {
-                SelectedWave = wave;
-                SelectedEnemy = null;
-            }
-            else
-            {
-                SelectedWave = null;
-                SelectedEnemy = (Enemy)e.NewValue;
-            }
+            var enemy = e.NewValue as Enemy;
+
+            SelectedWave = wave;
+            SelectedEnemy = enemy;
 
             WavePanel.DataContext = SelectedWave;
             EnemyPanel.DataContext = SelectedEnemy;
