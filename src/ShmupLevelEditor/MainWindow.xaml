@@ -3,10 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:models="clr-namespace:ShmupLevelEditor.Models"
         mc:Ignorable="d"
         Title="Shmup Level Editor" Height="350" Width="525" d:DataContext="{d:DesignInstance }">
-  <Grid>
+    <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
@@ -34,8 +33,8 @@
 
       <StackPanel Grid.Row="0"
                   Orientation="Horizontal">
-        <Button Name="AddButton" Click="AddButton_OnClick">Add</Button>
-        <Button Name="RemoveButton" Click="RemoveButton_OnClick">Remove</Button>
+        <Button Name="AddButton" Click="AddButton_OnClick">Add Wave</Button>
+        <Button Name="RemoveButton" Click="RemoveButton_OnClick">Remove Selected</Button>
       </StackPanel>
 
       <ScrollViewer Grid.Row="1">
@@ -60,8 +59,24 @@
 
     <StackPanel Grid.Row="1" Grid.Column="1">
 
-      <Label Content="Before Wave Delay:" />
-      <TextBox Text="0" Name="BeforeWaveDelayEdit" />
+      <StackPanel Name="WavePanel">
+        <Label Content="Before Wave Delay:" />
+        <TextBox Text="{Binding BeforeWaveDelay, Mode=TwoWay}" Name="BeforeWaveDelayEdit" />
+      </StackPanel>
+
+      <StackPanel Name="EnemyPanel">
+        <Label Content="Type:" />
+        <TextBox Text="{Binding Type, Mode=TwoWay}" Name="Type" />
+
+        <Label Content="Spawn:" />
+        <TextBox Text="{Binding Spawn, Mode=TwoWay}" Name="Spawn" />
+
+        <Label Content="Speed:" />
+        <TextBox Text="{Binding Speed, Mode=TwoWay}" Name="Speed" />
+
+        <Label Content="Y" />
+        <TextBox Text="{Binding Y, Mode=TwoWay}" Name="Y" />
+      </StackPanel>
 
     </StackPanel>
   </Grid>

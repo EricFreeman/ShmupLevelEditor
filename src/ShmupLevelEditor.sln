@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShmupLevelEditor", "ShmupLevelEditor\ShmupLevelEditor.csproj", "{64A0E609-5834-46D4-BCE1-0C488E142354}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShmupLevelEditor.Util", "ShmupLevelEditor.Util\ShmupLevelEditor.Util.csproj", "{70159B99-933B-41F3-960A-5BB2A3BBCEC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{64A0E609-5834-46D4-BCE1-0C488E142354}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64A0E609-5834-46D4-BCE1-0C488E142354}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64A0E609-5834-46D4-BCE1-0C488E142354}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70159B99-933B-41F3-960A-5BB2A3BBCEC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70159B99-933B-41F3-960A-5BB2A3BBCEC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70159B99-933B-41F3-960A-5BB2A3BBCEC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70159B99-933B-41F3-960A-5BB2A3BBCEC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

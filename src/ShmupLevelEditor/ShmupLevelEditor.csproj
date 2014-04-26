@@ -95,6 +95,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ShmupLevelEditor.Util\ShmupLevelEditor.Util.csproj">
+      <Project>{70159B99-933B-41F3-960A-5BB2A3BBCEC4}</Project>
+      <Name>ShmupLevelEditor.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

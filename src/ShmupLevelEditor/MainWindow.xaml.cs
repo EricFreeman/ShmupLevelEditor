@@ -9,10 +9,11 @@ namespace ShmupLevelEditor
 {
     public partial class MainWindow : INotifyPropertyChanged
     {
-        private ObservableCollection<Wave> _waveList;
+        #region Properties
 
-        private Wave SelectedWave;
-        private Enemy SelectedEnemy;
+        private ObservableCollection<Wave> _waveList;
+        private Wave _selectedWave;
+        private Enemy _selectedEnemy;
 
         public ObservableCollection<Wave> WaveList
         {
@@ -24,12 +25,40 @@ namespace ShmupLevelEditor
             }
         }
 
+        public Wave SelectedWave
+        {
+            get { return _selectedWave; }
+            set
+            {
+                _selectedWave = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Enemy SelectedEnemy
+        {
+            get { return _selectedEnemy; }
+            set
+            {
+                _selectedEnemy = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region Constructor
+
         public MainWindow()
         {
             InitializeComponent();
 
             WaveList = new ObservableCollection<Wave>();
         }
+
+        #endregion
+
+        #region Button Events
 
         private void AddButton_OnClick(object sender, RoutedEventArgs e)
         {
@@ -47,6 +76,22 @@ namespace ShmupLevelEditor
             WavesEdit.ItemsSource = WaveList;
         }
 
+        private void RemoveButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (SelectedWave != null)
+            {
+                _waveList.Remove(SelectedWave);
+            }
+            else if (SelectedEnemy != null)
+            {
+                _waveList.First(x => x.EnemyList.Contains(SelectedEnemy)).EnemyList.Remove(SelectedEnemy);
+            }
+        }
+
+        #endregion
+
+        #region Treeview Events
+
         private void WavesEdit_OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             var wave = e.NewValue as Wave;
@@ -60,21 +105,14 @@ namespace ShmupLevelEditor
                 SelectedWave = null;
                 SelectedEnemy = (Enemy)e.NewValue;
             }
+
+            WavePanel.DataContext = SelectedWave;
+            EnemyPanel.DataContext = SelectedEnemy;
         }
 
-        private void RemoveButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (SelectedWave != null)
-            {
-                _waveList.Remove(SelectedWave);
-            }
-            else if(SelectedEnemy != null)
-            {
-                _waveList.First(x => x.EnemyList.Contains(SelectedEnemy)).EnemyList.Remove(SelectedEnemy);
-            }
-        }
+        #endregion
 
-        #region ProeprtyChanged
+        #region PropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
 
