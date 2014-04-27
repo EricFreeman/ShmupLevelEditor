@@ -149,7 +149,7 @@ namespace ShmupLevelEditor
                 Type = "Popcorn",
                 Spawn = 0,
                 Speed = 5,
-                Y = 4
+                X = 4
             };
         }
 

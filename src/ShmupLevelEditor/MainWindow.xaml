@@ -107,7 +107,7 @@
         <Label Content="Speed:" />
         <TextBox Text="{Binding Speed, Mode=TwoWay}" Name="Speed" />
 
-        <Label Content="Y" />
+        <Label Content="X" />
         <TextBox Text="{Binding Y, Mode=TwoWay}" Name="Y" />
 
         <Label Content="Money" />
