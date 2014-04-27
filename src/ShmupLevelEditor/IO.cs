@@ -19,7 +19,7 @@ namespace ShmupLevelEditor
                 text += "\t<Wave BeforeWaveDelay='{0}'>\r\n".ToFormat(wave.BeforeWaveDelay);
 
                 text = wave.EnemyList.Aggregate(text, (current, enemy) => current + 
-                    "\t\t<Enemy Type='{0}' Spawn='{1}' Y='{2}' Speed='{3}' />\r\n".ToFormat(enemy.Type, enemy.Spawn, enemy.Y, enemy.Speed));
+                    "\t\t<Enemy Type='{0}' Spawn='{1}' Y='{2}' Speed='{3}' Money='{4}' />\r\n".ToFormat(enemy.Type, enemy.Spawn, enemy.Y, enemy.Speed, enemy.Money));
 
                 text += "\t</Wave>\r\n";
             }
@@ -51,10 +51,11 @@ namespace ShmupLevelEditor
                 {
                     w.EnemyList.Add(new Enemy
                     {
-                        Type = enemy.Attributes["Type"].InnerText,
-                        Spawn = float.Parse(enemy.Attributes["Spawn"].InnerText),
-                        Y = float.Parse(enemy.Attributes["Y"].InnerText),
-                        Speed = float.Parse(enemy.Attributes["Speed"].InnerText)
+                        Type = enemy.GetAttribute("Type"),
+                        Spawn = float.Parse(enemy.GetAttribute("Spawn").Default("0")),
+                        Y = float.Parse(enemy.GetAttribute("Y").Default("0")),
+                        Speed = float.Parse(enemy.GetAttribute("Speed").Default("0")),
+                        Money = float.Parse(enemy.GetAttribute("Money").Default("0"))
                     });
                 }
 

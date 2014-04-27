@@ -8,6 +8,7 @@ namespace ShmupLevelEditor.Models
         private float _spawn;
         private float _y;
         private float _speed;
+        private float _money;
 
         public string Type
         {
@@ -45,6 +46,16 @@ namespace ShmupLevelEditor.Models
             set
             {
                 _speed = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public float Money
+        {
+            get { return _money; }
+            set
+            {
+                _money = value;
                 OnPropertyChanged();
             }
         }

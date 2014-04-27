@@ -100,7 +100,7 @@
         
         <Label Content="Type:" />
         <TextBox Text="{Binding Type, Mode=TwoWay}" Name="Type" />
-
+        
         <Label Content="Spawn:" />
         <TextBox Text="{Binding Spawn, Mode=TwoWay}" Name="Spawn" />
 
@@ -109,6 +109,10 @@
 
         <Label Content="Y" />
         <TextBox Text="{Binding Y, Mode=TwoWay}" Name="Y" />
+
+        <Label Content="Money" />
+        <TextBox Text="{Binding Money, Mode=TwoWay}" Name="Money" />
+        
       </StackPanel>
 
     </StackPanel>
