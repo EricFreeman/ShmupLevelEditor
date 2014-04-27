@@ -3,6 +3,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using Microsoft.Win32;
 using ShmupLevelEditor.Interfaces;
 using ShmupLevelEditor.Models;
@@ -63,17 +65,17 @@ namespace ShmupLevelEditor
 
         #region Button Events
 
+        private void AddEnemy_OnClick(object sender, RoutedEventArgs e)
+        {
+            if(SelectedWave != null)
+                SelectedWave.EnemyList.Add(CreateEnemy());
+        }
+
         private void AddButton_OnClick(object sender, RoutedEventArgs e)
         {
             var w = new Wave
             {
-                EnemyList =
-                    new ObservableCollection<Enemy>
-                    {
-                        new Enemy {Type = "Popcorn"},
-                        new Enemy {Type = "ZigZag"},
-                        new Enemy {Type = "Bomber"}
-                    }
+                EnemyList = new ObservableCollection<Enemy>()
             };
             WaveList.Add(w);
             WavesEdit.ItemsSource = WaveList;
@@ -107,6 +109,25 @@ namespace ShmupLevelEditor
             EnemyPanel.DataContext = SelectedEnemy;
         }
 
+        // remove selected when clicking whitespace
+        private void WavesEdit_OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.RightButton == MouseButtonState.Released && (sender as TreeViewItem) == null)
+            {
+                // Deselect from TreeView
+                var treeItem = (TreeViewItem)WavesEdit.ItemContainerGenerator.ContainerFromItem(WavesEdit.SelectedItem);
+                if(treeItem != null)
+                    treeItem.IsSelected = false;
+
+                // Deselect from here to update panels
+                SelectedEnemy = null;
+                SelectedWave = null;
+
+                WavePanel.DataContext = SelectedWave;
+                EnemyPanel.DataContext = SelectedEnemy;
+            }
+        }
+
         #endregion
 
         #region Helpers
@@ -119,6 +140,17 @@ namespace ShmupLevelEditor
             WavePanel.DataContext = SelectedWave;
             EnemyPanel.DataContext = SelectedEnemy;
             WaveList.Clear();
+        }
+
+        private Enemy CreateEnemy()
+        {
+            return new Enemy
+            {
+                Type = "Popcorn",
+                Spawn = 0,
+                Speed = 5,
+                Y = 4
+            };
         }
 
         #endregion

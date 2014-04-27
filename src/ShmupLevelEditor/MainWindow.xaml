@@ -40,7 +40,18 @@
       <ScrollViewer Grid.Row="1">
         <TreeView Name="WavesEdit"
                   ItemsSource="{Binding WaveList}"
-                  SelectedItemChanged="WavesEdit_OnSelectedItemChanged">
+                  SelectedItemChanged="WavesEdit_OnSelectedItemChanged"
+                  PreviewMouseDown="WavesEdit_OnPreviewMouseDown">
+
+          <TreeView.ContextMenu>
+            <ContextMenu>
+              
+              <MenuItem Header="Add Enemy" Click="AddEnemy_OnClick" />
+              <MenuItem Header="Remove Selected" Click="RemoveButton_OnClick" />
+              
+            </ContextMenu>
+          </TreeView.ContextMenu>
+          
           <TreeView.ItemTemplate>
             <HierarchicalDataTemplate ItemsSource="{Binding Path=EnemyList}" >
               <TextBlock Text="Wave" />
