@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -16,11 +17,11 @@ namespace ShmupLevelEditor
     {
         #region Properties
 
-        private ObservableCollection<Wave> _waveList;
+        private List<Wave> _waveList;
         private Wave _selectedWave;
         private Enemy _selectedEnemy;
 
-        public ObservableCollection<Wave> WaveList
+        public List<Wave> WaveList
         {
             get { return _waveList; }
             set
@@ -58,7 +59,7 @@ namespace ShmupLevelEditor
         {
             InitializeComponent();
 
-            WaveList = new ObservableCollection<Wave>();
+            WaveList = new List<Wave>();
         }
 
         #endregion
@@ -75,7 +76,7 @@ namespace ShmupLevelEditor
         {
             var w = new Wave
             {
-                EnemyList = new ObservableCollection<Enemy>()
+                EnemyList = new List<Enemy>()
             };
             WaveList.Add(w);
             WavesEdit.ItemsSource = WaveList;
@@ -107,6 +108,12 @@ namespace ShmupLevelEditor
 
             WavePanel.DataContext = SelectedWave;
             EnemyPanel.DataContext = SelectedEnemy;
+
+            foreach (var w in WaveList)
+            {
+                if(!w.EnemyList.Select(x => x.Spawn).ToList().IsInOrder())
+                    w.EnemyList = w.EnemyList.OrderBy(x => x.Spawn).ToList();
+            }
         }
 
         // remove selected when clicking whitespace

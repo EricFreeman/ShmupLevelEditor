@@ -17,6 +17,7 @@ namespace ShmupLevelEditor.Models
             {
                 _type = value;
                 OnPropertyChanged();
+                OnPropertyChanged("EditorName");
             }
         }
 
@@ -27,6 +28,7 @@ namespace ShmupLevelEditor.Models
             {
                 _spawn = value;
                 OnPropertyChanged();
+                OnPropertyChanged("EditorName");
             }
         }
 
@@ -58,6 +60,11 @@ namespace ShmupLevelEditor.Models
                 _money = value;
                 OnPropertyChanged();
             }
+        }
+
+        public string EditorName
+        {
+            get { return "{0} - {1}".ToFormat(Type, Spawn); }
         }
     }
 }

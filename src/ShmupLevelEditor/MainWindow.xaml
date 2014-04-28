@@ -58,7 +58,7 @@
               
               <HierarchicalDataTemplate.ItemTemplate>
                 <DataTemplate>
-                  <TextBlock Text="{Binding Path=Type}"/>
+                  <TextBlock Text="{Binding Path=EditorName}"/>
                 </DataTemplate>
               </HierarchicalDataTemplate.ItemTemplate>
             </HierarchicalDataTemplate>

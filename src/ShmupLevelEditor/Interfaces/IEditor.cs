@@ -1,11 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using ShmupLevelEditor.Models;
 
 namespace ShmupLevelEditor.Interfaces
 {
     public interface IEditor
     {
-        ObservableCollection<Wave> WaveList { get; set; }
+        List<Wave> WaveList { get; set; }
 
         void Clear();
     }

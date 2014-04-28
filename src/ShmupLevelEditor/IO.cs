@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Xml;
@@ -40,12 +41,12 @@ namespace ShmupLevelEditor
             doc.Load(fileName);
             var waves = doc.SelectSingleNode("Waves");
 
-            editor.WaveList = new ObservableCollection<Wave>();
+            editor.WaveList = new List<Wave>();
 
             foreach (XmlNode wave in waves.SelectNodes("Wave"))
             {
                 var w = new Wave();
-                w.EnemyList = new ObservableCollection<Enemy>();
+                w.EnemyList = new List<Enemy>();
 
                 foreach (XmlNode enemy in wave.SelectNodes("Enemy"))
                 {
