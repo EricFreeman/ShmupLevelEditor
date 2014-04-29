@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -17,11 +16,11 @@ namespace ShmupLevelEditor
     {
         #region Properties
 
-        private List<Wave> _waveList;
+        private ObservableCollection<Wave> _waveList;
         private Wave _selectedWave;
         private Enemy _selectedEnemy;
 
-        public List<Wave> WaveList
+        public ObservableCollection<Wave> WaveList
         {
             get { return _waveList; }
             set
@@ -59,7 +58,7 @@ namespace ShmupLevelEditor
         {
             InitializeComponent();
 
-            WaveList = new List<Wave>();
+            WaveList = new ObservableCollection<Wave>();
         }
 
         #endregion
@@ -76,7 +75,7 @@ namespace ShmupLevelEditor
         {
             var w = new Wave
             {
-                EnemyList = new List<Enemy>()
+                EnemyList = new ObservableCollection<Enemy>()
             };
             WaveList.Add(w);
             WavesEdit.ItemsSource = WaveList;
@@ -92,6 +91,18 @@ namespace ShmupLevelEditor
             {
                 _waveList.First(x => x.EnemyList.Contains(SelectedEnemy)).EnemyList.Remove(SelectedEnemy);
             }
+        }
+
+        private void UpWaveButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (SelectedWave != null)
+                WaveList = WaveList.MoveUp(SelectedWave);
+        }
+
+        private void DownWaveButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (SelectedWave != null)
+                WaveList = WaveList.MoveDown(SelectedWave);
         }
 
         #endregion
@@ -111,8 +122,8 @@ namespace ShmupLevelEditor
 
             foreach (var w in WaveList)
             {
-                if(!w.EnemyList.Select(x => x.Spawn).ToList().IsInOrder())
-                    w.EnemyList = w.EnemyList.OrderBy(x => x.Spawn).ToList();
+                if(w.EnemyList.Select(x => x.Spawn).ToList().IsNotInOrder())
+                    w.EnemyList = new ObservableCollection<Enemy>(w.EnemyList.OrderBy(x => x.Spawn));
             }
         }
 

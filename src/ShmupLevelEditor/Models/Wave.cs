@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using ShmupLevelEditor.Util;
 
 namespace ShmupLevelEditor.Models
 {
     public class Wave : NotifyPropertyChangedBase
     {
-        private List<Enemy> _enemyList;
+        private ObservableCollection<Enemy> _enemyList;
         private float _beforeWaveDelay;
 
-        public List<Enemy> EnemyList
+        public ObservableCollection<Enemy> EnemyList
         {
             get { return _enemyList; }
             set

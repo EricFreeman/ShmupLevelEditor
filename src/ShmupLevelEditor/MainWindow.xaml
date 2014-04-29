@@ -35,6 +35,8 @@
                   Orientation="Horizontal">
         <Button Name="AddButton" Click="AddButton_OnClick">Add Wave</Button>
         <Button Name="RemoveButton" Click="RemoveButton_OnClick">Remove Selected</Button>
+        <Button Name="UpWaveButton" Click="UpWaveButton_OnClick">Up</Button>
+        <Button Name="DownWaveButton" Click="DownWaveButton_OnClick">Down</Button>
       </StackPanel>
 
       <ScrollViewer Grid.Row="1">
