@@ -93,6 +93,14 @@ namespace ShmupLevelEditor
             }
         }
 
+        private void DuplicateButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var toDupe = ((Enemy) WavesEdit.SelectedItem);
+            var wave = WaveList.First(x => x.EnemyList.Contains(toDupe));
+            wave.EnemyList.Add(toDupe.Clone());
+            ReorderWaves();
+        }
+
         private void UpWaveButton_OnClick(object sender, RoutedEventArgs e)
         {
             if (SelectedWave != null)
@@ -120,10 +128,15 @@ namespace ShmupLevelEditor
             WavePanel.DataContext = SelectedWave;
             EnemyPanel.DataContext = SelectedEnemy;
 
+            ReorderWaves();
+        }
+
+        private void ReorderWaves()
+        {
             foreach (var w in WaveList)
             {
-                if(w.EnemyList.Select(x => x.Spawn).ToList().IsNotInOrder())
-                    w.EnemyList = new ObservableCollection<Enemy>(w.EnemyList.OrderBy(x => x.Spawn));
+                if (w.EnemyList.Select(x => x.Spawn).ToList().IsNotInOrder())
+                    w.EnemyList = new ObservableCollection<Enemy>(w.EnemyList.OrderBy(x => x.Spawn).ThenBy(x => x.Type));
             }
         }
 
@@ -167,7 +180,7 @@ namespace ShmupLevelEditor
                 Type = "Popcorn",
                 Spawn = 0,
                 Speed = 5,
-                X = 4
+                X = 0
             };
         }
 

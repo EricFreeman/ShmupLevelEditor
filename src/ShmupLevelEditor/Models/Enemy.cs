@@ -66,5 +66,10 @@ namespace ShmupLevelEditor.Models
         {
             get { return "{0} - {1}".ToFormat(Type, Spawn); }
         }
+
+        public Enemy Clone()
+        {
+            return (Enemy)MemberwiseClone();
+        }
     }
 }

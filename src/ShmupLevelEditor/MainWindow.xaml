@@ -50,6 +50,7 @@
               
               <MenuItem Header="Add Enemy" Click="AddEnemy_OnClick" />
               <MenuItem Header="Remove Selected" Click="RemoveButton_OnClick" />
+              <MenuItem Header="Duplicate Selected" Click="DuplicateButton_OnClick" />
               
             </ContextMenu>
           </TreeView.ContextMenu>
